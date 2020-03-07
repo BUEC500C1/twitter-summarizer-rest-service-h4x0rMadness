@@ -1,90 +1,22 @@
-# video-h4x0rMadness
-video-h4x0rMadness created by GitHub Classroom
+# Configuration
 
-## Function:
+- Connect to my EC2 instance:
 
-**Generate a short video of text version of twitter daily feed**
+```
+ssh -i /Users/robertmorrislike/flask-restful.pem ubuntu@ec2-34-230-16-206.compute-1.amazonaws.com
+```
 
-## Usage:
-  
-  - download twitter-feed-ffmpeg.py
-  
-  - in terminal: 
-      
-        python twitter-feed-ffmpeg.py 
-    
-    then the twitter feed short video should be in the path:
-    
-        ./UniquePicturesFolder/dailyfeed.mov
-      
-## Design:
+To do that, I have to firstly modify the permission of secure key file to 400 instead of 700, otherwise it fails, using
 
-        
-<p align="center">
-  <img width="600" height="300" src="/graphs/architecture.png">
-</p>
+```
+sudo chmod 400 /Users/robertmorrislike/flask-restful.pem
+```
 
 
-## Description:
+- Transfer python script for twitter feed:
 
-  1. the script get all feed texts
-  
-  2. texts being converted into images:
-  
-  <p align="center">
-  <img width="600" height="300" src="/graphs/images.png">
-</p>
+scp -i /Users/robertmorrislike/flask-restful.pem /Users/robertmorrislike/PycharmProjects/EC500/HW5/twitter_feed.py ubuntu@ec2-34-230-16-206.compute-1.amazonaws.com:~
 
-  <p align="center">
-  <img width="600" height="300" src="/graphs/19.png">
-</p>
+scp -i /Users/robertmorrislike/flask-restful.pem /Users/robertmorrislike/PycharmProjects/EC500/HW5/sample_flask.py ubuntu@ec2-34-230-16-206.compute-1.amazonaws.com:~
 
-  3. images are converted into video and then images are deleted:
-  
-   <p align="center">
-  <img width="600" height="300" src="/graphs/video.png">
-</p>
-
-  4. user will see the progress bar in command line:
-  
-   <p align="center">
-  <img width="700" height="50" src="/graphs/progress.png">
-</p>
-
-
-
-  - initialize the variables:
-  
-    ~~~~
-    class DailyFeed:
-    def __init__(self, API_key, API_secret_key, Access_token, Access_token_secret):
-        self.api = self.authenticate(API_key, API_secret_key, Access_token, Access_token_secret)
-        self.height = 700
-        self.width = 400
-        self.feed_number = 20
-        self.q = queue.Queue()
-        self.num_threads = 4
-    ~~~~
-  
-  - start function:
-  
-    ~~~
-    def Start(self):
-        self.msg = self.get_home_feed(self.api)
-        self.bar = Bar('Total Progress of Daily Feed', max=self.feed_number, fill='@', suffix='%(percent)d%%')
-        self.per = 0
-        self.create_folder()
-        self.thread_main()
-        self.merge_to_video()
-        self.delete_pictures()
-    ~~~
-
-  - main function:
-  
-    ~~~
-    if __name__ == '__main__':
-      obj = DailyFeed(API_key, API_secret_key, Access_token, Access_token_secret)
-      obj.Start()
-      ~~~
-      
- 
+scp -i /Users/robertmorrislike/flask-restful.pem /Users/robertmorrislike/PycharmProjects/EC500/HW5/keys ubuntu@ec2-34-230-16-206.compute-1.amazonaws.com:~
