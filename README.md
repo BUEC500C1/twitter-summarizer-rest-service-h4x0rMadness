@@ -20,3 +20,5 @@ scp -i /Users/robertmorrislike/flask-restful.pem /Users/robertmorrislike/Pycharm
 scp -i /Users/robertmorrislike/flask-restful.pem /Users/robertmorrislike/PycharmProjects/EC500/HW5/sample_flask.py ubuntu@ec2-34-230-16-206.compute-1.amazonaws.com:~
 
 scp -i /Users/robertmorrislike/flask-restful.pem /Users/robertmorrislike/PycharmProjects/EC500/HW5/keys ubuntu@ec2-34-230-16-206.compute-1.amazonaws.com:~
+
+- Installing python3, pip and all dependencies...
